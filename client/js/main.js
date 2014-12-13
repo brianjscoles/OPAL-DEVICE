@@ -6,7 +6,7 @@ angular.module('omnigrahm', ['ngAutocomplete'])
       $timeout(function () {
         $scope.activeClasss = 'active';
       }, 500);
-      return $http.get('/api/instagram')                              // HERE!
+      return $http.get('/api/instagram') // HERE!
         .then(function (res) {
           $timeout(function () {
             var cities = res.data.map(function (city) {
@@ -19,9 +19,9 @@ angular.module('omnigrahm', ['ngAutocomplete'])
         });
     };
 
-    $scope.modal = function() {
+    $scope.modal = function () {
       $scope.modalBoolean = !$scope.modalBoolean;
-    }
+    };
   })
   .controller('FormController', function ($scope, $http) {
     $scope.fieldText = '';
@@ -37,33 +37,33 @@ angular.module('omnigrahm', ['ngAutocomplete'])
       if ($scope.currentCity !== null) {
         var city = $scope.currentCity;
         if (city.place_id === undefined) return false;
-        $http.get('/api/instagram/' + city.place_id)                  // AND HERE!
+        $http.get('/api/instagram/' + city.place_id) // AND HERE!
           .then(function (res) {
-            var _city  = {
-              name: city.name, 
+            var _city = {
+              name: city.name,
               lat: city.geometry.location.lat(),
               lng: city.geometry.location.lng(),
               place_id: city.place_id,
               positive: res.data[0].percent_positive * 175,
               negative: res.data[0].percent_negative * 175
-            }
+            };
             addSingleCity(_city);
           })
           .catch(function (err) {
-            var _city  = {
-              name: city.name, 
+            var _city = {
+              name: city.name,
               lat: city.geometry.location.lat(),
               lng: city.geometry.location.lng(),
               placeId: city.place_id,
               place_id: city.place_id,
-            }
-            $http.post('/api/instagram/'+_city.place_id, _city)                  // AND HERE!
+            };
+            $http.post('/api/instagram/' + _city.place_id, _city) // AND HERE!
               .then(function (res) {
                 console.log('POST City Request');
                 _city.positive = res.data.percent_positive * 175;
                 _city.negative = res.data.percent_negative * 175;
                 addSingleCity(_city);
-              })
+              });
           });
       }
     });

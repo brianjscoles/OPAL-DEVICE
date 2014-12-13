@@ -132,7 +132,8 @@ window.render = function (data, timeDelay) {
     .append("text")
     .text(getCityName)
     .attr("dx", function (d) {
-      if(!d.lng || !d.lat ){
+      if (!d.lng || !d.lat) {
+        console.log(d);
       }
       return (projection([d.lng, d.lat])[0]);
     })
