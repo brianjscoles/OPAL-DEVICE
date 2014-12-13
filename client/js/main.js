@@ -41,6 +41,7 @@ angular.module('omnigrahm', ['ngAutocomplete'])
     }, function () {
       if ($scope.currentCity !== null) {
         var city = $scope.currentCity;
+        console.log('currentCity: ', city);
         if (city.place_id === undefined) return false;
         $http.get('/api/instagram/' + city.place_id) // AND HERE!
           .then(function (res) {
@@ -68,6 +69,9 @@ angular.module('omnigrahm', ['ngAutocomplete'])
                 _city.positive = res.data.percent_positive * 175;
                 _city.negative = res.data.percent_negative * 175;
                 addSingleCity(_city);
+              })
+              .catch(function (err) {
+                console.log('POST Request failed: ', err);
               });
           });
       }
