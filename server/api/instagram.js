@@ -62,6 +62,7 @@ InstagramRouter.post('/:id', function (req, res) {
     lat: req.body.lat || req.param('lat'),
     name: req.body.city || req.param('name')
   };
+  console.log(city);
   utils.getInstagrams(city, 100, res);
 });
 

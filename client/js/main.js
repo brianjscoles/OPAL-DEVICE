@@ -54,6 +54,7 @@ angular.module('omnigrahm', ['ngAutocomplete'])
               name: city.name, 
               lat: city.geometry.location.lat(),
               lng: city.geometry.location.lng(),
+              placeId: city.place_id,
               place_id: city.place_id,
             }
             $http.post('/api/instagram/'+_city.place_id, _city)                  // AND HERE!
