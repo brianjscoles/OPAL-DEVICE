@@ -53,11 +53,8 @@ var utils = {
   },
 
   addInstagramDataToDb: function (city, messages, originalRes) {
-    var query = Cities.where({
-      placeId: city.placeId
-    });
     var updating = false;
-    query.findOneAsync()
+    Cities.findOneAsync({placeId: city.placeId})
       .then(function (cityRecord) {
         if (cityRecord) {
           updating = true;
