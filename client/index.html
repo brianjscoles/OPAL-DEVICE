@@ -8,6 +8,12 @@
 </head>
 <body ng-controller='AppController' data-ng-init="init()">
   <div id='app'>
+    <div id="modal-overlay" ng-show="modalBoolean"></div>
+    <div id="modal-box" ng-show="modalBoolean">
+      <h2>Omnigraph</h2>
+      <div>A map of positive and negative Instagram pictures across the United States.</div>
+      <div>Made by Dustin Sinkey, Brian Scoles, Jorge Silva, & Loring Dodge.</div>
+    </div>
     <div class='header'>
     <h1>Omnigrahm</h1>
     <form id='main-form' ng-controller='FormController as form'>
@@ -18,6 +24,7 @@
         />
       <input class='input submit' type='submit' value='Search' ng-click='submitForm()'/>
     </form>
+    <div id="info" ng-click="modal()">i</div>
     </div>
     <div class='svg-map' ng-class='activeClasss'></div>
   </div>
