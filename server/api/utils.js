@@ -112,6 +112,7 @@ var utils = {
   },
 
   getInstagrams: function (city, number, originalRes) {
+    console.log(city);
     var storage = [];
     var clientId = '0818d423f4be4da084f5e4b446457044';
     var apiUrl = 'https://api.instagram.com/v1/media/search?lat=' + city.lat;
@@ -138,6 +139,11 @@ var utils = {
       .catch(function (err) {
         console.log("Error: " + err);
       });
+  },
+
+  dropDb: function(){
+    Cities.remove({},function(){});
+    console.log("It's midnight... dropping DB.")
   }
 };
 

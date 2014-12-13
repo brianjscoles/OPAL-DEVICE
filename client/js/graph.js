@@ -64,13 +64,11 @@ d3.json("/json/us-simplified.json", function (error, us) {
 });
 
 window.setHappiness = function (data) {
-  console.log(data[0]);
   window.data = data;
   window.render(window.data);
 };
 
 window.addSingleCity = function (city) {
-  console.log('city', city);
   city.lat = '' + city.lat;
   city.lng = '' + city.lng;
   data.push(city);
@@ -135,7 +133,6 @@ window.render = function (data, timeDelay) {
     .text(getCityName)
     .attr("dx", function (d) {
       if(!d.lng || !d.lat ){
-        console.log(d);
       }
       return (projection([d.lng, d.lat])[0]);
     })
