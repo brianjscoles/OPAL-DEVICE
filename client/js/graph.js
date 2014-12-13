@@ -154,6 +154,20 @@ window.render = function (data, timeDelay) {
     .duration(500)
     .attr("r", total_radius);
 
+  // Append Central Point
+  cityCircle
+    .append("circle")
+    .attr("cx", function (d) {
+      return projection([d.lng, d.lat])[0];
+    })
+    .attr("cy", getY)
+    .attr("r", 0)
+    .attr('class', 'city neutral middle')
+    .transition()
+    .delay(getDelay)
+    .duration(500)
+    .attr("r", 1);
+
   // Append Positive Circle
   cityCircle
     .append("circle")

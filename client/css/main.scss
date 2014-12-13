@@ -224,6 +224,10 @@ body {
       &.neutral {
         fill: rgba(#ccc, 0.5);
         stroke: rgba(darken(#ccc, 20%), 0.7);
+        &.middle {
+          fill: rgba(#ccc, 0.7);
+          stroke-width: 2px;
+        }
       }
       &.positive {
         fill: rgba($green, 0.85);
