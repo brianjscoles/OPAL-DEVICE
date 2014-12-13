@@ -218,6 +218,10 @@ body {
       &.legend {
         .text {
           font-size: 8px;
+          &.legend {
+            fill: #ccc;
+            letter-spacing: 0.05em;
+          }
         }
       }
       &.transition-done {
