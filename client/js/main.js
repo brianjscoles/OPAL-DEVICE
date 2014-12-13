@@ -56,11 +56,11 @@ angular.module('omnigrahm', ['ngAutocomplete'])
               lng: city.geometry.location.lng(),
               place_id: city.place_id,
             }
-            $http.post('/api/instagram/', _city)                  // AND HERE!
+            $http.post('/api/instagram/'+_city.place_id, _city)                  // AND HERE!
               .then(function (res) {
                 console.log('POST City Request');
-                _city.positive = res.data[0].percent_positive * 100;
-                _city.positive = res.data[0].percent_negative * 100;
+                _city.positive = res.data.percent_positive * 100;
+                _city.negative = res.data.percent_negative * 100;
                 addSingleCity(_city);
               })
           });

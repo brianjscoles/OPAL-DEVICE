@@ -5,7 +5,6 @@ var config = require('./config/environment/production');
 var path = require('path');
 var bodyParser = require('body-parser');
 var Q = require('q');
-var jsonParser = bodyParser.json();
 var crontab = require('node-crontab');
 var instagramRouter = require("./api/instagram");
 var utils = require('./api/utils');
@@ -22,6 +21,7 @@ var app = express();
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use(bodyParser.json());
 
 // Routes
 app
