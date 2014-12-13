@@ -2,6 +2,7 @@ angular.module('omnigrahm', ['ngAutocomplete'])
   .controller('AppController', function ($scope, $timeout, $http) {
     $scope.activeClasss = 'not-active';
     $scope.modalBoolean = false;
+    $scope.modalBooleanDone = false;
     $scope.init = function () {
       $timeout(function () {
         $scope.activeClasss = 'active';
@@ -20,7 +21,11 @@ angular.module('omnigrahm', ['ngAutocomplete'])
     };
 
     $scope.modal = function () {
+      $scope.modalBooleanDone = false;
       $scope.modalBoolean = !$scope.modalBoolean;
+      $timeout(function () {
+        $scope.modalBooleanDone = true;
+      }, 200);
     };
   })
   .controller('FormController', function ($scope, $http) {
