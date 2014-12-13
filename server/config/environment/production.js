@@ -1,23 +1,20 @@
+/*jshint node:true */
 'use strict';
 
-// Production specific configuration
-// =================================
-module.exports = {
-  // Server IP
-  ip:       process.env.OPENSHIFT_NODEJS_IP ||
-            process.env.IP ||
-            undefined,
+var config = {};
 
-  // Server port
-  port:     process.env.OPENSHIFT_NODEJS_PORT ||
-            process.env.PORT || process.env.SERVER_PORT ||
-            3000,
+if (process.env.NODE_ENV === 'production') {
+  config = {
+    ip: process.env.IP || undefined,
+    port: process.env.PORT || process.env.SERVER_PORT || 3000,
+    uri: 'mongodb://omnigraph:jGSAfs2AxzSfUBcdGOpy_IbAvI.7PE9y8P74a_lDzSg-@ds030817.mongolab.com:30817/omnigraph'
+  };
+} else {
+  config = {
+    ip: undefined,
+    port: 3000,
+    uri: 'mongodb://localhost/omnigrahm'
+  };
+}
 
-  // MongoDB connection options
-  mongo: {
-    uri:    process.env.MONGOLAB_URI ||
-            process.env.MONGOHQ_URL ||
-            process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/omnigrahm'
-  }
-};
+module.exports = config;
