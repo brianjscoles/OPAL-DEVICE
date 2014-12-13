@@ -35,11 +35,12 @@ app
 console.log("server listening on port " + config.port);
 
 
-var cronJob = crontab.scheduleJob("*/5 * * * *", function () {
-  console.log("************************************************************");
-  console.log("***********************IT'S CRONTIME!!**********************");
-  console.log("************************************************************");
+var cronFetchTop30 = crontab.scheduleJob("*/5 * * * *", function () {
   utils.getTop30();
+});
+
+var cronDropDBAtMidnight = crontab.scheduleJob("0 0 * * *", function () {
+  utils.dropDB();
 });
 
 /**

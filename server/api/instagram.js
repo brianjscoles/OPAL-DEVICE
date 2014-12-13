@@ -3,12 +3,9 @@ var express = require('express');
 var utils = require('./utils');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-
+var cityList = require('../cities.json').cities
 var Cities = Promise.promisifyAll(mongoose.model("Cities"));
 var InstagramRouter = express.Router();
-
-//caution: this line clears out the entire DB!
-//Cities.remove({},function(){});
 
 
 //print out size and city list for current DB
@@ -26,21 +23,19 @@ Cities.find({}).exec()
 
 
 //this route is for returning the top 30 cities
-//TODO: refactor so it returns top 30, not just ALL cities in db.
 InstagramRouter.get('/', function (req, res) {
   console.log("request received at api/instagram/");
+  var arrayOfPlaceIds = [];
+  for(var key in cityList){
+    arrayOfPlaceIds.push(cityList[key].placeId)
+  };
 
-  Cities.findAsync({})
+  Cities.where('placeId').in(arrayOfPlaceIds).exec()
     .then(function (cities) {
       if (!cities) throw new Error('City Not Found');
       return res.json(cities);
-    }).catch(function (err) {
-      console.log("Error: " + err);
-      res.status(404).end();
-    });
+    })
 });
-
-
 
 InstagramRouter.get('/:id', function (req, res) {
   console.log("get request received at api/instagram/:id");
@@ -58,8 +53,6 @@ InstagramRouter.get('/:id', function (req, res) {
       res.status(404).end();
     });
 });
-
-
 
 InstagramRouter.post('/:id', function (req, res) {
   console.log("post request received at api/instagram/:id");

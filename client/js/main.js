@@ -10,8 +10,8 @@ angular.module('omnigrahm', ['ngAutocomplete'])
         .then(function (res) {
           $timeout(function () {
             var cities = res.data.map(function (city) {
-              city.positive = city.percent_positive * 100;
-              city.negative = city.percent_negative * 100;
+              city.positive = city.percent_positive * 175;
+              city.negative = city.percent_negative * 175;
               return city;
             });
             window.setHappiness(cities);
@@ -44,8 +44,8 @@ angular.module('omnigrahm', ['ngAutocomplete'])
               lat: city.geometry.location.lat(),
               lng: city.geometry.location.lng(),
               place_id: city.place_id,
-              positive: res.data[0].percent_positive * 100,
-              negative: res.data[0].percent_negative * 100
+              positive: res.data[0].percent_positive * 175,
+              negative: res.data[0].percent_negative * 175
             }
             addSingleCity(_city);
           })
@@ -59,8 +59,8 @@ angular.module('omnigrahm', ['ngAutocomplete'])
             $http.post('/api/instagram/'+_city.place_id, _city)                  // AND HERE!
               .then(function (res) {
                 console.log('POST City Request');
-                _city.positive = res.data.percent_positive * 100;
-                _city.negative = res.data.percent_negative * 100;
+                _city.positive = res.data.percent_positive * 175;
+                _city.negative = res.data.percent_negative * 175;
                 addSingleCity(_city);
               })
           });

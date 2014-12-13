@@ -139,6 +139,11 @@ var utils = {
       .catch(function (err) {
         console.log("Error: " + err);
       });
+  },
+
+  dropDb: function(){
+    Cities.remove({},function(){});
+    console.log("It's midnight... dropping DB.")
   }
 };
 
