@@ -10,36 +10,8 @@ var _ = require('lodash');
 
 var utils = {
 
-  // sendResponse : function(response, obj, status){
-  //   status = status || 200;
-  //   response.writeHead(status, headers);
-  //   response.end(obj);
-  // },
-
-  // collectData : function(request, callback){
-  //   var data = "";
-  //   request.on("data", function(chunk){
-  //     data += chunk;
-  //   });
-  //   request.on("end", function(){
-  //     callback(data);
-  //   });
-  // },
-
-  // send404 : function(response){
-  //   utils.sendResponse(response, '404: Page not found', 404);
-  // },
-
-  // sendRedirect : function(response, location, status){
-  //   status = status || 302;
-  //   response.writeHead(status, {Location: location});
-  //   response.end();
-  // },
-
   getTop30: function () {
-    console.log("getting top 30!");
     var i = 0;
-
     var getNextCity = function () {
       var city = cities.cities[i++];
       utils.getInstagrams(city, 100);
@@ -47,14 +19,14 @@ var utils = {
         setTimeout(getNextCity, 200);
       }
     };
-
     getNextCity();
-
   },
 
   addInstagramDataToDb: function (city, messages, originalRes) {
     var updating = false;
-    Cities.findOneAsync({placeId: city.placeId})
+    Cities.findOneAsync({
+        placeId: city.placeId
+      })
       .then(function (cityRecord) {
         if (cityRecord) {
           updating = true;
@@ -90,9 +62,6 @@ var utils = {
         });
         cityRecord.percent_positive = cityRecord.total_positives / cityRecord.total_searched;
         cityRecord.percent_negative = cityRecord.total_negatives / cityRecord.total_searched;
-
-
-        console.log("saving record to DB: " + cityRecord.name + " with " + cityRecord.total_searched + " messages.");
         if (updating) {
           if (originalRes) originalRes.status(201).json(cityRecord);
           return cityRecord.saveAsync();
@@ -109,7 +78,6 @@ var utils = {
   },
 
   getInstagrams: function (city, number, originalRes) {
-    console.log(city);
     var storage = [];
     var clientId = '0818d423f4be4da084f5e4b446457044';
     var apiUrl = 'https://api.instagram.com/v1/media/search?lat=' + city.lat;
@@ -138,9 +106,9 @@ var utils = {
       });
   },
 
-  dropDb: function(){
-    Cities.remove({},function(){});
-    console.log("It's midnight... dropping DB.")
+  dropDb: function () {
+    Cities.remove({}, function () {});
+    console.log("It's midnight... dropping DB.");
   }
 };
 

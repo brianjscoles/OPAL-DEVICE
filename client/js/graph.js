@@ -22,7 +22,7 @@ window.clickZoomOut = function () {
   zoomInOut(null, x, y, k);
 };
 
-var svg = d3.select(".svg-map").append("svg")
+var svg = d3.select("#main-svg")
   .attr("width", width)
   .attr("height", height)
   .on('click', clickZoomOut);
@@ -132,7 +132,8 @@ window.render = function (data, timeDelay) {
     .append("text")
     .text(getCityName)
     .attr("dx", function (d) {
-      if(!d.lng || !d.lat ){
+      if (!d.lng || !d.lat) {
+        console.log(d);
       }
       return (projection([d.lng, d.lat])[0]);
     })
@@ -152,6 +153,20 @@ window.render = function (data, timeDelay) {
     .delay(getDelay)
     .duration(500)
     .attr("r", total_radius);
+
+  // Append Central Point
+  cityCircle
+    .append("circle")
+    .attr("cx", function (d) {
+      return projection([d.lng, d.lat])[0];
+    })
+    .attr("cy", getY)
+    .attr("r", 0)
+    .attr('class', 'city neutral middle')
+    .transition()
+    .delay(getDelay)
+    .duration(500)
+    .attr("r", 1);
 
   // Append Positive Circle
   cityCircle

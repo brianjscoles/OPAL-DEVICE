@@ -38,30 +38,60 @@ body {
   width:100%;
   height:calc(100% - 50px);
   background-color:$blue_2;
-  opacity:0.4;
   z-index: 1000;
+  &.modalDone {
+    opacity: 0.4;
+  }
 }
 #modal-box {
   position:absolute;
-  top:calc(50% - 100px);
-  left:calc(50% - 150px);
+  top:calc(50% - 110px);
+  left:calc(50% - 175px);
   padding:20px;
-  width:300px;
-  height: 200px;
+  width:350px;
+  height: 220px;
   text-align:left;
   color:#FFF;
   background-color:$blue_2;
+  line-height: 1.75em;
   box-shadow:2px 2px 20px #666, -2px -2px 20px #666;
   z-index: 1000;
+  transform-origin: center center;
+  transform: rotateX(20deg) rotateY(20deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
   h2 {
     margin:0 0 20px 0;
   }
   div {
     margin-bottom:10px;
   }
-  // &.transitionIn {
-  //   -webkit-animation:transitionIn 0.5s linear; animation:transitionIn 0.5s linear;
-  // }
+  a {
+    color: white;
+  }
+  .authors {
+    font-size: 0.75em;
+    line-height: 1.5em;
+    margin-top: 24px;
+  }
+  &.modalDone {
+    opacity: 1;
+    transform: rotateX(0deg) rotateX(0deg);
+  }
+}
+
+
+#modal-overlay, #modal-box {
+  display: none;
+  opacity: 0;
+  transition: all 700ms ease;
+  &.transitionIn {
+    display: block;
+    transition: all 700ms ease;
+  }
+  &.modalDone {
+    transition: all 700ms ease;
+  }
 }
 
 // @-webkit-keyframes transitionIn {
@@ -79,7 +109,7 @@ body {
   background-color: $blue_2;
   border-bottom: solid 1px $dark-blue;
   h1 {
-    float:left; 
+    float:left;
     color: white;
     margin: 0;
     padding: 5px;
@@ -103,7 +133,7 @@ body {
     line-height:30px;
     text-align:center;
     font-weight:bold;
-    border-bottom: 5px solid #9DC0EA;
+    border-bottom: 2px solid #9DC0EA;
     font-size: 20px;
     border-radius: 50%;
     cursor:pointer;
@@ -185,6 +215,15 @@ body {
 
     g.city {
       transition: opacity 1s ease;
+      &.legend {
+        .text {
+          font-size: 8px;
+          &.legend {
+            fill: #ccc;
+            letter-spacing: 0.05em;
+          }
+        }
+      }
       &.transition-done {
         .text {
           transition: opacity 0.5s ease;
@@ -224,6 +263,10 @@ body {
       &.neutral {
         fill: rgba(#ccc, 0.5);
         stroke: rgba(darken(#ccc, 20%), 0.7);
+        &.middle {
+          fill: rgba(#ccc, 0.7);
+          stroke-width: 2px;
+        }
       }
       &.positive {
         fill: rgba($green, 0.85);

@@ -8,14 +8,14 @@
 </head>
 <body ng-controller='AppController' data-ng-init="init()">
   <div id='app'>
-    <div id="modal-overlay" ng-show="modalBoolean"></div>
-    <div id="modal-box" ng-show="modalBoolean">
+    <div id="modal-overlay" ng-class='{"transitionIn": modalBoolean, "modalDone": modalBooleanDone}'></div>
+    <div id="modal-box" ng-class='{"transitionIn": modalBoolean, "modalDone": modalBooleanDone}'>
       <h2>Omnigraph</h2>
-      <div>A map of positive and negative Instagram pictures across the United States.</div>
-      <div>Made by Dustin Sinkey, Brian Scoles, Jorge Silva, & Loring Dodge.</div>
+      <div>A map of positive and negative Instagram pictures across the United States. Check it out on <a href='https://github.com/silver-octopus-labs/opal-device'>GitHub</a>.</div>
+      <div class='authors'>Made by <a href='https://github.com/silver-octopus-labs'>Silver Octopus Labs</a>: <a href='https://github.com/dsinkey'>Dustin</a>, <a href='https://github.com/brianjscoles'>Brian</a>, <a href='https://github.com/thejsj'>Jorge</a>, & <a href='https://github.com/loringdodge'>Loring</a></div>
     </div>
     <div class='header'>
-    <h1>Omnigrahm</h1>
+    <h1>Omnigraph</h1>
     <form id='main-form' ng-controller='FormController as form'>
       <input
         class='input city-name' type='text'
@@ -26,7 +26,20 @@
     </form>
     <div id="info" ng-click="modal()">i</div>
     </div>
-    <div class='svg-map' ng-class='activeClasss'></div>
+    <div id='main-svg-map' class='svg-map' ng-class='activeClasss'>
+      <svg id='main-svg'>
+        <g class="city legend Helena transition-done centered">
+          <text dx="1064.69106679919236" dy="465.46000364286078" class="text city-name legend">LEGEND</text>
+          <text dx="1064.69106679919236" dy="479.46000364286078" class="text city-name">City Name</text>
+          <circle cx="1064.69106679919236" cy="519.46000364286078" r="30" class="city neutral"></circle>
+          <circle cx="1064.69106679919236" cy="519.46000364286078" r="1" class="city neutral middle"></circle>
+          <circle cx="1056.4334910416166" cy="519.46000364286078" r="17.742424" class="city positive"></circle>
+          <text dx="1056.4334910416166" dy="519.46000364286078" class="text positive">Positive</text>
+          <circle cx="1091.50924861737417" cy="519.46000364286078" r="8.181818181818182" class="city negative"></circle>
+          <text dx="1091.50924861737417" dy="519.46000364286078" class="text negative">Negative</text>
+        </g>
+      </svg>
+    </div>
   </div>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
   <script src="bower_components/angular/angular.js"></script>
