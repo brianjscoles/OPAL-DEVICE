@@ -22,7 +22,7 @@ window.clickZoomOut = function () {
   zoomInOut(null, x, y, k);
 };
 
-var svg = d3.select(".svg-map").append("svg")
+var svg = d3.select("#main-svg")
   .attr("width", width)
   .attr("height", height)
   .on('click', clickZoomOut);

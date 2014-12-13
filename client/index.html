@@ -26,7 +26,19 @@
     </form>
     <div id="info" ng-click="modal()">i</div>
     </div>
-    <div class='svg-map' ng-class='activeClasss'></div>
+    <div id='main-svg-map' class='svg-map' ng-class='activeClasss'>
+      <svg id='main-svg'>
+        <g class="city legend Helena transition-done centered">
+          <text dx="1064.69106679919236" dy="479.46000364286078" class="text city-name">City Name</text>
+          <circle cx="1064.69106679919236" cy="519.46000364286078" r="30" class="city neutral"></circle>
+          <circle cx="1064.69106679919236" cy="519.46000364286078" r="1" class="city neutral middle"></circle>
+          <circle cx="1056.4334910416166" cy="519.46000364286078" r="17.742424" class="city positive"></circle>
+          <text dx="1056.4334910416166" dy="519.46000364286078" class="text positive">Positive</text>
+          <circle cx="1091.50924861737417" cy="519.46000364286078" r="8.181818181818182" class="city negative"></circle>
+          <text dx="1091.50924861737417" dy="519.46000364286078" class="text negative">Negative</text>
+        </g>
+      </svg>
+    </div>
   </div>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
   <script src="bower_components/angular/angular.js"></script>

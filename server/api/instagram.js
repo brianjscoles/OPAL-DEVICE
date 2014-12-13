@@ -3,7 +3,7 @@ var express = require('express');
 var utils = require('./utils');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-var cityList = require('../cities.json').cities
+var cityList = require('../cities.json').cities;
 var Cities = Promise.promisifyAll(mongoose.model("Cities"));
 var InstagramRouter = express.Router();
 
@@ -21,31 +21,25 @@ Cities.find({}).exec()
     });
   });
 
-
 //this route is for returning the top 30 cities
 InstagramRouter.get('/', function (req, res) {
-  console.log("request received at api/instagram/");
   var arrayOfPlaceIds = [];
-  for(var key in cityList){
-    arrayOfPlaceIds.push(cityList[key].placeId)
-  };
-
+  for (var key in cityList) {
+    arrayOfPlaceIds.push(cityList[key].placeId);
+  }
   Cities.where('placeId').in(arrayOfPlaceIds).exec()
     .then(function (cities) {
       if (!cities) throw new Error('City Not Found');
       return res.json(cities);
-    })
+    });
 });
 
 InstagramRouter.get('/:id', function (req, res) {
-  console.log("get request received at api/instagram/:id");
   Cities.findAsync({
       placeId: req.params.id
     })
     .then(function (city) {
-      if (!city || (Array.isArray(city) && city.length === 0)) {
-        throw new Error('City Not Found');
-      }
+      if (!city || (Array.isArray(city) && city.length === 0)) throw new Error('City Not Found');
       return res.json(city);
     })
     .catch(function (err) {
@@ -55,14 +49,12 @@ InstagramRouter.get('/:id', function (req, res) {
 });
 
 InstagramRouter.post('/:id', function (req, res) {
-  console.log("post request received at api/instagram/:id");
   var city = {
     placeId: req.body.placeId || req.param('placeId'),
     lng: req.body.lng || req.param('lng'),
     lat: req.body.lat || req.param('lat'),
     name: req.body.city || req.param('name')
   };
-  console.log(city);
   utils.getInstagrams(city, 100, res);
 });
 
