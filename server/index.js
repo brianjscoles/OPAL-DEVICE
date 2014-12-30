@@ -28,7 +28,7 @@ app
 
 console.log("server listening on port " + config.port, " / Environment: ", process.env.NODE_ENV);
 
-var cronFetchTop30 = crontab.scheduleJob("*/5 * * * *", function () {
+var cronFetchTop30 = crontab.scheduleJob("1 */2 * * *", function () {
   utils.getTop30();
 });
 
