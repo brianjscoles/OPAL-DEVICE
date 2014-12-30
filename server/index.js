@@ -33,7 +33,7 @@ var cronFetchTop30 = crontab.scheduleJob("*/5 * * * *", function () {
 });
 
 var cronDropDBAtMidnight = crontab.scheduleJob("0 0 * * *", function () {
-  utils.dropDB();
+  utils.clearDB();
 });
 
 module.exports = app;

@@ -19,7 +19,7 @@
     <form id='main-form' ng-controller='FormController as form'>
       <input
         class='input city-name' type='text'
-        ng-autocomplete ng-model='fieldText' ng-change='triggerChange()' placeholder='San Francisco'
+        ng-autocomplete ng-model='fieldText' ng-change='triggerChange()' placeholder='Search any city'
         details='currentCity' options='cities'
         />
       <input class='input submit' type='submit' value='Search' ng-click='submitForm()'/>

@@ -106,9 +106,9 @@ var utils = {
       });
   },
 
-  dropDb: function () {
-    Cities.remove({}, function () {});
-    console.log("It's midnight... dropping DB.");
+  clearDb: function(){
+    Cities.remove({},function(){});
+    console.log("It's midnight... clearing out DB.")
   }
 };
 
